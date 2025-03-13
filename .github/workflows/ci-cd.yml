@@ -55,7 +55,7 @@ jobs:
           git pull origin main
 
           # Stop all running Docker containers
-          docker stop $(docker ps -q)
+          docker ps -q | xargs -r docker stop
 
           # Build and restart the Docker containers
           docker-compose up -d --build
