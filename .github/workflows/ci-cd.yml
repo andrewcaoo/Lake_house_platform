@@ -55,5 +55,5 @@ jobs:
           git pull origin main
 
           # Build and restart the Docker containers
-          docker ps -q | xargs -r docker stop && docker system prune -a -f && docker compose --profile trino --profile spark --profile airflow up -d --build
+          docker ps -q | xargs -r docker stop && docker system prune -a -f && docker-compose --profile trino --profile spark --profile airflow up -d --build
           "
