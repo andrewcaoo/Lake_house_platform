@@ -18,6 +18,19 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Create deploy.sh script
+        run: |
+          ssh -o StrictHostKeyChecking=no root@103.146.22.174 "echo '#!/bin/bash
+          cd ../../home/Lakehouse || exit
+          git fetch origin
+          if git show-ref --verify --quiet refs/remotes/origin/main; then
+              git checkout main
+          else
+              git checkout -b main origin/main
+          fi
+          git pull origin main
+          docker-compose up -d --build' > ../../home/Lakehouse/deploy.sh && chmod +x ../../home/Lakehouse/deploy.sh"
+
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no root@103.146.22.174 "bash ../../home/Lakehouse/deploy.sh"
