@@ -21,16 +21,30 @@ jobs:
       - name: Create deploy.sh script
         run: |
           ssh -o StrictHostKeyChecking=no root@103.146.22.174 "echo '#!/bin/bash
-          cd ../../home/Lakehouse || exit
+          REPO_URL=\"https://github.com/andrewcaoo/Lake_house_platform.git"  # Replace with your repository URL
+          REPO_DIR=\"../../home"  # Replace with the path where you want to clone the repo
+          
+          if [ ! -d \"\$REPO_DIR\" ]; then
+              git clone \"\$REPO_URL\" \"\$REPO_DIR\"
+          fi
+          
+          cd \"\$REPO_DIR\" || exit
           git fetch origin
           if git show-ref --verify --quiet refs/remotes/origin/main; then
               git checkout main
           else
-              git checkout -b main origin/main
+              first_branch=\$(git branch -r | grep -v '\->' | head -n 1 | sed 's/origin\///')
+              if [ -n \"\$first_branch\" ]; then
+                  git checkout -b main origin/\$first_branch
+              else
+                  echo \"No branches available to create 'main' from.\"
+                  exit 1
+              fi
           fi
+          
           git pull origin main
-          docker-compose up -d --build' > ../../home/Lake_house_platform/deploy.sh && chmod +x ../../home/Lake_house_platform/deploy.sh"
+          docker-compose up -d --build' > /../../home/Lakehouse/deploy.sh && chmod +x /../../home/Lakehouse/deploy.sh"
 
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no root@103.146.22.174 "bash ../../home/Lake_house_platform/deploy.sh"
+          ssh -o StrictHostKeyChecking=no root@103.146.22.174 "bash /../../home/Lakehouse/deploy.sh"
