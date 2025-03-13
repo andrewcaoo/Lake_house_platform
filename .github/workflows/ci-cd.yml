@@ -20,4 +20,4 @@ jobs:
 
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no root@103.146.22.174 "cd ../../home/Lakehouse && docker-compose pull && docker-compose up -d --build"
+          ssh -o StrictHostKeyChecking=no root@103.146.22.174 "cd ../../home/Lakehouse && docker-compose up -d --build"
