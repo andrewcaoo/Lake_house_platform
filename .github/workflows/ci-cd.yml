@@ -29,8 +29,8 @@ jobs:
               git checkout -b main origin/main
           fi
           git pull origin main
-          docker-compose up -d --build' > ../../home/Lakehouse/deploy.sh && chmod +x ../../home/Lakehouse/deploy.sh"
+          docker-compose up -d --build' > ../../home/Lake_house_platform/deploy.sh && chmod +x ../../home/Lake_house_platform/deploy.sh"
 
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no root@103.146.22.174 "bash ../../home/Lakehouse/deploy.sh"
+          ssh -o StrictHostKeyChecking=no root@103.146.22.174 "bash ../../home/Lake_house_platform/deploy.sh"
