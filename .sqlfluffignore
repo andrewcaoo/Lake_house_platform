@@ -1,0 +1,3 @@
+dbts/target/
+dbts/dbt_packages/
+dbts/dbt-macro/

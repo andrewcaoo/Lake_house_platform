@@ -1,0 +1,32 @@
+{
+    "code": 0,
+    "data": {
+      "category_rules": [
+        {
+          "exemption_of_identifier_code": {
+            "support_identifier_code_exemption": true
+          },
+          "is_size_chart_mandatory": false,
+          "product_certifications": [
+            {
+              "id": "123456",
+              "is_mandatory": true,
+              "name": "product_cert_name",
+              "requirement_conditions": [
+                {
+                  "attribute_id": "101610",
+                  "attribute_value_id": "1024358",
+                  "condition_type": "VALUE_ID_MATCH"
+                }
+              ],
+              "sample": "example"
+            }
+          ],
+          "support_cod": false,
+          "support_size_chart": true
+        }
+      ]
+    },
+    "message": "Success",
+    "request_id": "202203070749000101890810281E8C70B7"
+  }
